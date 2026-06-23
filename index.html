@@ -391,7 +391,7 @@ function joinChat() {
   myUsername = val;
   document.getElementById('my-tag').textContent = '👤 ' + myUsername;
 
-  ws = new WebSocket('ws://localhost:8765');
+  ws = new WebSocket('web-production-17f3f.up.railway.app');
 
   ws.onopen = () => {
     ws.send(JSON.stringify({ type: 'join', username: myUsername }));
