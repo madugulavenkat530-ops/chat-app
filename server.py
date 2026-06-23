@@ -6,7 +6,7 @@ import os
 
 connected_users = {}
 
-async def handle_connection(websocket):
+async def handle_connection(websocket, path=None):
     username = None
     try:
         message = await websocket.recv()
@@ -62,7 +62,13 @@ async def broadcast_status():
 
 async def main():
     port = int(os.environ.get("PORT", 8765))
-    async with websockets.serve(handle_connection, "0.0.0.0", port):
+    async with websockets.serve(
+        handle_connection,
+        "0.0.0.0",
+        port,
+        ping_interval=20,
+        ping_timeout=60
+    ):
         print(f"🚀 Server running on port {port}")
         await asyncio.Future()
 
