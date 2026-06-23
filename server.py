@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import json
 import uuid
+import os
 
 connected_users = {}
 
@@ -60,8 +61,9 @@ async def broadcast_status():
         await ws.send(payload)
 
 async def main():
-    async with websockets.serve(handle_connection, "localhost", 8765):
-        print("🚀 Server running on ws://localhost:8765")
+    port = int(os.environ.get("PORT", 8765))
+    async with websockets.serve(handle_connection, "0.0.0.0", port):
+        print(f"🚀 Server running on port {port}")
         await asyncio.Future()
 
 asyncio.run(main())
