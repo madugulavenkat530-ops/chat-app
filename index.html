@@ -330,7 +330,7 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
   </div>
   <div class="login-card">
     <label for="username-input">Your username</label>
-    <input id="username-input" type="text" placeholder="e.g. Pallavi" maxlength="20" autocomplete="off"/>
+    <input id="username-input" type="text" placeholder="e.g. Venkat Ram Charan" maxlength="30" autocomplete="off"/>
     <button onclick="joinChat()">Join Chat →</button>
   </div>
 </div>
@@ -391,7 +391,7 @@ function joinChat() {
   myUsername = val;
   document.getElementById('my-tag').textContent = '👤 ' + myUsername;
 
-  ws = new WebSocket('web-production-17f3f.up.railway.app');
+  ws = new WebSocket('ws://localhost:8765');
 
   ws.onopen = () => {
     ws.send(JSON.stringify({ type: 'join', username: myUsername }));
